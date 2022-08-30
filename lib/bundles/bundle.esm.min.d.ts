@@ -232,11 +232,11 @@ declare function getRoot(resource: any): any;
 declare function getSatelliteFromLdpResource(resource: string, engine?: QueryEngine): Promise<string>;
 
 declare function _NS(localName: string): string;
-declare const LBDS: {
+declare const CONSOLID: {
     PREFIX: string;
     NAMESPACE: string;
     PREFIX_AND_NAMESPACE: {
-        lbds: string;
+        consolid: string;
     };
     NS: typeof _NS;
     Aggregator: string;
@@ -258,6 +258,6 @@ declare const LBDS: {
     hasSatellite: string;
     ProjectInvite: string;
 };
-//# sourceMappingURL=lbds.d.ts.map
+//# sourceMappingURL=consolid.d.ts.map
 
-export { AccessService, Catalog, DataService, LBDS, generateSession, getRoot, getSatelliteFromLdpResource };
+export { AccessService, CONSOLID, Catalog, DataService, generateSession, getRoot, getSatelliteFromLdpResource };

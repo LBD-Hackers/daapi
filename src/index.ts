@@ -2,7 +2,7 @@ import Catalog from './Catalog'
 import AccessService from './helpers/access-service'
 import DataService from './helpers/data-service'
 import {generateSession, getRoot, getSatelliteFromLdpResource} from './helpers/functions'
-import LBDS from './helpers/vocab/lbds'
+import CONSOLID from './helpers/vocab/consolid'
 
 export {
     Catalog,
@@ -11,5 +11,5 @@ export {
     generateSession,
     getRoot,
     getSatelliteFromLdpResource,
-    LBDS
+    CONSOLID
 }

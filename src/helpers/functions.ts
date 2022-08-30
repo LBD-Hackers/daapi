@@ -48,7 +48,8 @@ export async function generateSession(options: any, webId: string): Promise<Toke
 
 export function getRoot(resource) {
   let root = resource.split('/').slice(0, resource.split('/').length -1);
-  root = root.join('/') + '/'
+  root = root.join('/')
+  if (!root.endsWith('/')) root += '/'
   return root
 }
 
@@ -59,10 +60,10 @@ export async function getSatelliteFromLdpResource(resource: string, engine?: Que
 
   // find webId of resource
   let root = getRoot(resource)
-  const webId = root + "/profile/card#me";
+  const webId = root + "profile/card#me";
   const query = `
   SELECT ?satellite WHERE {
-    <${webId}> <https://w3id.org/lbdserver#hasSparqlSatellite> ?satellite .
+    <${webId}> <https://w3id.org/consolid#hasSparqlSatellite> ?satellite .
   } LIMIT 1`
 
   const bindingsStream = await engine.queryBindings(query, {sources: [webId]});
@@ -79,7 +80,7 @@ const prefixes = `
 prefix owl: <http://www.w3.org/2002/07/owl#> 
 prefix beo: <http://pi.pauwel.be/voc/buildingelement#>
 prefix props: <http://example.org/props#> 
-prefix lbds: <https://w3id.org/lbdserver#>
+prefix consolid: <https://w3id.org/consolid#>
 prefix schema: <http://schema.org/>
 `
 
@@ -91,10 +92,10 @@ function inference(myEngine, { registries, fetch, store }): Promise<void> {
        ?s1 owl:sameAs ?s2 .
        ?s2 owl:sameAs ?s1 .
       } WHERE {
-          {?concept1 lbds:hasReference/lbds:hasIdentifier/<https://w3id.org/lbdserver#value> ?s1 .
-          ?concept2 lbds:hasReference/lbds:hasIdentifier/<https://w3id.org/lbdserver#value> ?s2 .
+          {?concept1 lbds:hasReference/lbds:hasIdentifier/<https://w3id.org/consolid#value> ?s1 .
+          ?concept2 lbds:hasReference/lbds:hasIdentifier/<https://w3id.org/consolid#value> ?s2 .
           ?concept1 owl:sameAs ?concept2 .} UNION {
-            ?concept1 lbds:hasReference/lbds:hasIdentifier/<https://w3id.org/lbdserver#value> ?s1, ?s2 .
+            ?concept1 lbds:hasReference/lbds:hasIdentifier/<https://w3id.org/consolid#value> ?s1, ?s2 .
           }
           FILTER(isIRI(?s1) && isIRI(?s2))
           FILTER(?s1 != ?s2)
