@@ -49,6 +49,7 @@ export async function generateSession(options: any, webId: string): Promise<Toke
 export function getRoot(resource) {
   let root = resource.split('/').slice(0, resource.split('/').length -1);
   root = root.join('/')
+  console.log('root', root)
   if (!root.endsWith('/')) root += '/'
   return root
 }
