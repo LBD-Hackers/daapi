@@ -1,22 +1,20 @@
-import Fetch from 'cross-fetch'
-
 export interface TokenSession {
-    fetch: typeof Fetch,
-    info: info
-  }
+  fetch: (input: RequestInfo, init?: RequestInit) => Promise<Response>,
+  info: info
+}
 
 interface info {
-    webId: string,
-    isLoggedIn: boolean
+  webId: string,
+  isLoggedIn: boolean
 }
 
 export interface metadata {
-  subject?: string
-  predicate: string,
-  object: string
+subject?: string
+predicate: string,
+object: string
 }
 
 export interface extern {
-  named: string,
-  sparql: string
+named: string,
+sparql: string
 }
