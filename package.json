@@ -1,6 +1,6 @@
 {
   "name": "consolid-daapi",
-  "version": "0.0.8",
+  "version": "0.0.10",
   "description": "",
   "main": "lib/esm/index.js",
   "module": "lib/esm/index.js",
@@ -63,6 +63,7 @@
     "@inrupt/solid-client-authn-core": "^1.12.0",
     "@inrupt/solid-client-authn-node": "^1.11.3",
     "@inrupt/vocab-common-rdf": "^1.0.3",
+    "consolid-vocabulary": "^1.0.2",
     "cross-fetch": "^3.1.5",
     "n3": "^1.16.2",
     "rdf-serialize": "^2.0.0",

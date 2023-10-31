@@ -47,10 +47,12 @@ export default class Catalog {
    * @description create this dataset within the active project
    * @param makePublic initial access rights for the dataset (boolean)
    */
-  public async create(makePublic, triples: metadata[] = []): Promise<void> {
+  public async create(makePublic, triples: metadata[] = [], type?: string): Promise<void> {
+    if (type !== "Catalog" && type !== "Dataset") {
+      throw new Error('type must be either "Catalog" or "Dataset"')
+    }
     let data = `
-      <> a <${DCAT.Catalog}>, <${DCAT.Dataset}> .
-
+      <> a <${DCAT[type]}> .
     `
 
     for (const triple of triples) {
@@ -175,7 +177,7 @@ export default class Catalog {
         queryStart = `CONSTRUCT {
           ?parent <${DCAT.dataset}> ?child .
           ?parent <${DCAT.distribution}> ?dist .
-          ?dist <${DCAT.downloadURL}> ?url
+          ?dist <${DCAT.accessURL}> ?url
         }`
     }
 
@@ -185,7 +187,7 @@ export default class Catalog {
         ?parent <${DCAT.dataset}> ?child .
       } UNION {
         ?parent <${DCAT.distribution}> ?dist .
-        ?dist <${DCAT.downloadURL}> ?url .
+        ?dist <${DCAT.accessURL}> ?url .
       }
     }`
 
@@ -215,7 +217,7 @@ export default class Catalog {
   public async addDistribution(distributionUrl = getRoot(this.url) + v4(), triples: metadata[] = []) {
     let query = `INSERT DATA {
       <${this.url}> <${DCAT.distribution}> <${distributionUrl}> .
-      <${distributionUrl}> <${DCAT.downloadURL}> <${distributionUrl}> .`
+      <${distributionUrl}> <${DCAT.accessURL}> <${distributionUrl}> .`
 
     for (const triple of triples) {
       let o
@@ -236,7 +238,7 @@ export default class Catalog {
   public async deleteDistribution(distributionUrl) {
     const query = `DELETE DATA {
       <${this.url}> <${DCAT.distribution}> <${distributionUrl}> .
-      <${distributionUrl}> <${DCAT.downloadURL}> <${distributionUrl}> .
+      <${distributionUrl}> <${DCAT.accessURL}> <${distributionUrl}> .
   }`
     await this.update(query)
     await this.dataService.deleteFile(distributionUrl)

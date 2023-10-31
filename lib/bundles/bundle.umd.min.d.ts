@@ -3,7 +3,6 @@ import * as _inrupt_solid_client from '@inrupt/solid-client';
 import * as _inrupt_solid_client_dist_interfaces from '@inrupt/solid-client/dist/interfaces';
 import { Session } from '@inrupt/solid-client-authn-browser';
 import { Session as Session$1 } from '@inrupt/solid-client-authn-node';
-import Fetch from 'cross-fetch';
 import { QueryEngine } from '@comunica/query-sparql';
 
 declare class AccessRights {
@@ -172,7 +171,7 @@ declare class DataService {
 }
 
 interface TokenSession {
-    fetch: typeof Fetch;
+    fetch: (input: RequestInfo, init?: RequestInit) => Promise<Response>;
     info: info;
 }
 interface info {

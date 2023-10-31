@@ -1,6 +1,5 @@
-import Fetch from 'cross-fetch';
 export interface TokenSession {
-    fetch: typeof Fetch;
+    fetch: (input: RequestInfo, init?: RequestInit) => Promise<Response>;
     info: info;
 }
 interface info {
